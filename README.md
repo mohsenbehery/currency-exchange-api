@@ -34,39 +34,43 @@ MongoDB
 Installation
 Clone the repository to your local machine:
 
-bash
-Copy code
+```bash
 git clone https://github.com/your-username/currency-exchange-api.git
+```
 Navigate to the project directory:
 
-bash
-Copy code
+```bash
 cd currency-exchange-api
+```
+
 Install dependencies:
 
-bash
-Copy code
+```bash
 npm install
+```
+
 Configuration
 Set up environment variables:
 Create a .env file in the root directory.
 Add the following environment variables:
-makefile
-Copy code
+```bash
 PORT=3000
 MONGODB_URI=<your_mongodb_connection_string>
 JWT_SECRET=<your_jwt_secret_key>
+```
 Running the Application
 To start the server, run the following command:
 
-bash
-Copy code
+```bash
 npm start
+```
 The server will start listening on port 3000 by default. You can access the API at http://localhost:3000.
 
 Testing
 To run unit tests, use the following command:
+```bash
 npm test
+```
 
 
 Currency Exchange API Documentation
@@ -77,37 +81,8 @@ The API uses JWT-based authentication for securing user-related endpoints. Users
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _ _ _ _  _ _ _
 
 Endpoints:
-1. Convert Currency
-Endpoint: POST /convert
-Description: Converts currency amounts between different currencies.
-Request Format:
-{
-"amount": 100,
-"sourceCurrency": "USD",
-"targetCurrency": "EUR"
-}
-Response Format:
-json
-Copy code
-{
-  "convertedAmount": 87.32,
-  "sourceCurrency": "USD",
-  "targetCurrency": "EUR"
-}
-
-Certainly! I can provide you with a template for your API documentation based on the requirements you provided. Here's a structured outline for your documentation:
-
-Currency Exchange API Documentation
-Overview:
-The Currency Exchange API provides functionality for currency conversion, user account management, and transaction history. This document outlines the endpoints, request/response formats, authentication instructions, and usage examples for interacting with the API.
-
-Base URL:
-arduino
-Copy code
-https://your-api-domain.com/api
-Authentication:
-The API uses JWT-based authentication for securing user-related endpoints. Users need to register and obtain an authentication token to access protected endpoints.
-
+```
+```
 Endpoints:
 1. Convert Currency
 Endpoint: POST /convert
@@ -132,7 +107,9 @@ Copy code
   "sourceCurrency": "USD",
   "targetCurrency": "EUR"
 }
-______
+```
+-----
+```
 2. User Registration
 Endpoint: POST /user/register
 Description: Allows users to register by providing a username and password.
@@ -142,6 +119,9 @@ Request Format:
   "username": "example_user",
   "password": "example_password"
 }
+```
+-----
+```
 3. User Login
 Endpoint: POST /user/login
 Description: Allows users to authenticate themselves using their username and password.
@@ -154,6 +134,9 @@ Response Format:
 {
   "token": "<JWT_token>"
 }
+```
+-----
+```
 4. User Transaction History
 Endpoint: GET /user/history
 Description: Displays the transaction history for the authenticated user.
@@ -170,23 +153,9 @@ Response Format:
     }
   ]
 }
-
-## Installation
-
-```bash
-$ npm install
+```
+-----
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 
 
