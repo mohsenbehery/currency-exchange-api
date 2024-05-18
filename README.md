@@ -22,9 +22,154 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Currency Exchange API
+This repository contains the source code for the Currency Exchange API, which allows users to convert currency amounts, manage user accounts, and view transaction history.
+
+Prerequisites
+Before running the application, ensure you have the following prerequisites installed on your system:
+
+Node.js
+MongoDB
+Installation
+Clone the repository to your local machine:
+
+bash
+Copy code
+git clone https://github.com/your-username/currency-exchange-api.git
+Navigate to the project directory:
+
+bash
+Copy code
+cd currency-exchange-api
+Install dependencies:
+
+bash
+Copy code
+npm install
+Configuration
+Set up environment variables:
+Create a .env file in the root directory.
+Add the following environment variables:
+makefile
+Copy code
+PORT=3000
+MONGODB_URI=<your_mongodb_connection_string>
+JWT_SECRET=<your_jwt_secret_key>
+Running the Application
+To start the server, run the following command:
+
+bash
+Copy code
+npm start
+The server will start listening on port 3000 by default. You can access the API at http://localhost:3000.
+
+Testing
+To run unit tests, use the following command:
+npm test
+
+
+Currency Exchange API Documentation
+
+Authentication:
+The API uses JWT-based authentication for securing user-related endpoints. Users need to register and obtain an authentication token to access protected endpoints.
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _  _ _ _ _  _ _ _
+
+Endpoints:
+1. Convert Currency
+Endpoint: POST /convert
+Description: Converts currency amounts between different currencies.
+Request Format:
+{
+"amount": 100,
+"sourceCurrency": "USD",
+"targetCurrency": "EUR"
+}
+Response Format:
+json
+Copy code
+{
+  "convertedAmount": 87.32,
+  "sourceCurrency": "USD",
+  "targetCurrency": "EUR"
+}
+
+Certainly! I can provide you with a template for your API documentation based on the requirements you provided. Here's a structured outline for your documentation:
+
+Currency Exchange API Documentation
+Overview:
+The Currency Exchange API provides functionality for currency conversion, user account management, and transaction history. This document outlines the endpoints, request/response formats, authentication instructions, and usage examples for interacting with the API.
+
+Base URL:
+arduino
+Copy code
+https://your-api-domain.com/api
+Authentication:
+The API uses JWT-based authentication for securing user-related endpoints. Users need to register and obtain an authentication token to access protected endpoints.
+
+Endpoints:
+1. Convert Currency
+Endpoint: POST /convert
+Description: Converts currency amounts between different currencies.
+Request Format:
+Headers:
+Authorization: Bearer <JWT_token>
+Body:
+json
+Copy code
+{
+"amount": 100,
+"sourceCurrency": "USD",
+"targetCurrency": "EUR"
+}
+Copy code
+Response Format:
+json
+Copy code
+{
+  "convertedAmount": 87.32,
+  "sourceCurrency": "USD",
+  "targetCurrency": "EUR"
+}
+______
+2. User Registration
+Endpoint: POST /user/register
+Description: Allows users to register by providing a username and password.
+Request Format:
+{
+  "email": "example_email@mm.com"
+  "username": "example_user",
+  "password": "example_password"
+}
+3. User Login
+Endpoint: POST /user/login
+Description: Allows users to authenticate themselves using their username and password.
+Request Format:
+{
+  "email": "example_email@mm.com"
+  "password": "example_password"
+}
+Response Format:
+{
+  "token": "<JWT_token>"
+}
+4. User Transaction History
+Endpoint: GET /user/history
+Description: Displays the transaction history for the authenticated user.
+Request Format: Headers: Authorization: Bearer <JWT_token>
+Response Format:
+{
+  "transactions": [
+    {
+      "timestamp": "2024-05-20T08:00:00Z",
+      "sourceCurrency": "USD",
+      "sourceAmount": 100,
+      "targetCurrency": "EUR",
+      "convertedAmount": 87.32
+    }
+  ]
+}
 
 ## Installation
 
@@ -43,31 +188,5 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
-```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
