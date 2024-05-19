@@ -116,7 +116,7 @@ Response Format:
 User Transaction History<br>
 Endpoint: GET /user/history<br>
 Description: Displays the transaction history for the authenticated user.<br>
-Request Format:Headers:Authorization: Bearer <JWT_token>
+Request Format:Headers:Authorization: Bearer <JWT_token><br>
 Response Format:
 ```bash
 {
