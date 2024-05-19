@@ -28,8 +28,8 @@ npm install
 ```
 
 Configuration.
-Set up environment variables:
-Create a .env file in the root directory.
+Set up environment variables:<br>
+Create a .env file in the root directory.<br>
 Add the following environment variables:
 
 ```bash
@@ -44,7 +44,7 @@ To start the server, run the following command:
 npm start
 ```
 
-The server will start listening on port 3000 by default. You can access the API at http://localhost:3000.
+The server will start listening on port 3000 by default.<br> You can access the API at http://localhost:3000.
 
 ##Testing
 
@@ -54,14 +54,14 @@ To run unit tests, use the following command:
 npm test
 ```
 
-###Currency Exchange API Documentation
+###Currency Exchange API Documentation<br>
 Authentication:
-The API uses JWT-based authentication for securing user-related endpoints. Users need to register and obtain an authentication token to access protected endpoints.
+The API uses JWT-based authentication for securing user-related endpoints.<br> Users need to register and obtain an authentication token to access protected endpoints.
 
-##Endpoints:
-###Convert Currency
---Endpoint: POST /convert
-Description: Converts currency amounts between different currencies.
+##Endpoints:<br>
+###Convert Currency<br>
+--Endpoint: POST /convert<br>
+Description: Converts currency amounts between different currencies.<br>
 -Request Format:
 ```bash
 {
@@ -79,9 +79,9 @@ Description: Converts currency amounts between different currencies.
   "targetCurrency": "EUR"
 }
 ```
-###User Registration
---Endpoint: POST /user/register
-Description: Allows users to register by providing a username and password.
+###User Registration<br>
+--Endpoint: POST /user/register<br>
+Description: Allows users to register by providing a username and password.<br>
 -Request Format:
 ```bash
 {
@@ -91,8 +91,8 @@ Description: Allows users to register by providing a username and password.
 }
 ```
 ###User Login
---Endpoint: POST /user/login
-Description: Allows users to authenticate themselves using their username and password.
+--Endpoint: POST /user/login<br>
+Description: Allows users to authenticate themselves using their username and password.<br>
 Request Format:
 ```bash
 {
@@ -106,9 +106,9 @@ Response Format:
   "token": "<JWT_token>"
 }
 ```
-User Transaction History
-Endpoint: GET /user/history
-Description: Displays the transaction history for the authenticated user.
+User Transaction History<br>
+Endpoint: GET /user/history<br>
+Description: Displays the transaction history for the authenticated user.<br>
 Request Format:Headers:Authorization: Bearer <JWT_token>
 Response Format:
 ```bash
