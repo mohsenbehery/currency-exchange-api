@@ -23,11 +23,13 @@ Before running the application, ensure you have the following prerequisites inst
 ```bash
 git clone https://github.com/your-username/currency-exchange-api.git
 ```
+
 ##Navigate to the project directory:
 
 ```bash
 cd currency-exchange-api
 ```
+
 ##Install dependencies:
 
 ```bash
@@ -44,6 +46,7 @@ PORT=3000
 MONGODB_URI=<your_mongodb_connection_string>
 JWT_SECRET=<your_jwt_secret_key>
 ```
+
 ##Running the Application
 To start the server, run the following command:
 
@@ -70,6 +73,7 @@ The API uses JWT-based authentication for securing user-related endpoints.<br> U
 --Endpoint: POST /convert<br>
 Description: Converts currency amounts between different currencies.<br>
 -Request Format:
+
 ```bash
 {
   "amount": 100,
@@ -77,7 +81,9 @@ Description: Converts currency amounts between different currencies.<br>
   "targetCurrency": "EUR"
 }
 ```
+
 -Response Format:
+
 ```bash
 
 {
@@ -86,10 +92,12 @@ Description: Converts currency amounts between different currencies.<br>
   "targetCurrency": "EUR"
 }
 ```
+
 ###User Registration<br>
 --Endpoint: POST /user/register<br>
 Description: Allows users to register by providing a username and password.<br>
 -Request Format:
+
 ```bash
 {
   "email": "example_email@mm.com",
@@ -97,27 +105,33 @@ Description: Allows users to register by providing a username and password.<br>
   "password": "example_password"
 }
 ```
+
 ###User Login
 --Endpoint: POST /user/login<br>
 Description: Allows users to authenticate themselves using their username and password.<br>
 Request Format:
+
 ```bash
 {
   "email": "example_email@mm.com",
   "password": "example_password"
 }
 ```
+
 Response Format:
+
 ```bash
 {
   "token": "<JWT_token>"
 }
 ```
+
 User Transaction History<br>
 Endpoint: GET /user/history<br>
 Description: Displays the transaction history for the authenticated user.<br>
 Request Format:Headers:Authorization: Bearer <JWT_token><br>
 Response Format:
+
 ```bash
 {
   "transactions": [
@@ -131,3 +145,5 @@ Response Format:
   ]
 }
 ```
+
+![Diagram](./DB_Diagram.png)
