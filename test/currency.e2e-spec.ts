@@ -13,9 +13,15 @@ import {
   Transaction,
   TransactionSchema,
 } from '../src/schema/transaction.model';
+import { AxiosResponse } from 'axios';
+
+class MockHttpService {
+  get = jest.fn();
+}
 
 describe('CurrencyController (e2e)', () => {
   let app: INestApplication;
+  let httpService: HttpService;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -45,17 +51,7 @@ describe('CurrencyController (e2e)', () => {
         },
         {
           provide: HttpService,
-          useValue: {
-            get: jest.fn(() => {
-              return of({
-                data: {
-                  conversion_rates: {
-                    SAR: 3.75,
-                  },
-                },
-              });
-            }),
-          },
+          useClass: MockHttpService,
         },
       ],
     }).compile();
@@ -63,6 +59,8 @@ describe('CurrencyController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
+
+    httpService = app.get(HttpService);
   });
 
   afterAll(async () => {
@@ -85,24 +83,31 @@ describe('CurrencyController (e2e)', () => {
 
     const accessToken = loginResponse.body.accessToken;
 
-    const amount = 100;
-    const to = 3.75; // SAR exchange rate
-    const expectedConvertedAmount = amount * to;
+    const mockResponse: AxiosResponse = {
+      data: { conversion_rates: { EUR: 0.9201 } },
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {
+        headers: undefined,
+      },
+    };
+
+    jest.spyOn(httpService, 'get').mockReturnValue(of(mockResponse));
 
     const response = await request(app.getHttpServer())
       .post('/convert')
       .send({
-        amount: amount,
+        amount: 100,
         from: 'USD',
-        to: 'SAR',
+        to: 'EUR',
       })
       .set('Authorization', `Bearer ${accessToken}`)
       .expect(201);
 
+    console.log('Response Body:', response.body);
+
     expect(response.body).toHaveProperty('convertedAmount');
-    expect(response.body.convertedAmount).toBeCloseTo(
-      expectedConvertedAmount,
-      2,
-    );
+    expect(response.body.convertedAmount).toBeCloseTo(92.01);
   });
 });
