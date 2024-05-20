@@ -64,86 +64,22 @@ To run unit tests, use the following command:
 npm test
 ```
 
-###Currency Exchange API Documentation<br>
-Authentication:
-The API uses JWT-based authentication for securing user-related endpoints.<br> Users need to register and obtain an authentication token to access protected endpoints.
+## Swagger Documentation
 
-##Endpoints:<br>
-###Convert Currency<br>
---Endpoint: POST /convert<br>
-Description: Converts currency amounts between different currencies.<br>
--Request Format:
+The Currency Exchange API provides Swagger documentation for easy exploration and testing of the API endpoints. Follow the steps below to access the Swagger documentation:
 
-```bash
-{
-  "amount": 100,
-  "sourceCurrency": "USD",
-  "targetCurrency": "EUR"
-}
-```
+1. Ensure that the Currency Exchange API server is running on your local machine or a remote server.
 
--Response Format:
+2. Open your web browser and navigate to the Swagger UI endpoint: [http://localhost:3000/api-docs](http://localhost:3000/api-docs). Replace `localhost:3000` with the appropriate server address if running on a remote server.
 
-```bash
+3. You will see the Swagger UI interface, which displays a list of available endpoints, request/response formats, and allows you to interact with the API.
 
-{
-  "convertedAmount": 87.32,
-  "sourceCurrency": "USD",
-  "targetCurrency": "EUR"
-}
-```
+4. Explore the available endpoints, make requests, and view the responses directly from the Swagger UI interface. This is a convenient way to test the API functionalities.
 
-###User Registration<br>
---Endpoint: POST /user/register<br>
-Description: Allows users to register by providing a username and password.<br>
--Request Format:
+![Swagger UI Screenshot](./Swagger-diagram.png)
 
-```bash
-{
-  "email": "example_email@mm.com",
-  "username": "example_user",
-  "password": "example_password"
-}
-```
+## Database Diagram
 
-###User Login
---Endpoint: POST /user/login<br>
-Description: Allows users to authenticate themselves using their username and password.<br>
-Request Format:
-
-```bash
-{
-  "email": "example_email@mm.com",
-  "password": "example_password"
-}
-```
-
-Response Format:
-
-```bash
-{
-  "token": "<JWT_token>"
-}
-```
-
-User Transaction History<br>
-Endpoint: GET /user/history<br>
-Description: Displays the transaction history for the authenticated user.<br>
-Request Format:Headers:Authorization: Bearer <JWT_token><br>
-Response Format:
-
-```bash
-{
-  "transactions": [
-    {
-      "timestamp": "2024-05-20T08:00:00Z",
-      "sourceCurrency": "USD",
-      "sourceAmount": 100,
-      "targetCurrency": "EUR",
-      "convertedAmount": 87.32
-    }
-  ]
-}
-```
+The following diagram illustrates the database schema for the Currency Exchange API:
 
 ![Diagram](./DB_Diagram.png)
