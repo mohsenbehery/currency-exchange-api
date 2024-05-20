@@ -15,21 +15,54 @@ import { SignUpResDto } from './dtos/create-user.res';
 import { SignInResDto } from './dtos/singIn.res';
 import { AuthGuard } from './auth.guard';
 import { TransactionResDto } from '../currency/dtos/transaction-res.dto';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private usersService: UserService) {}
   @Serialize(SignUpResDto)
   @Post('/register')
+  @ApiBody({ type: SignupDto })
+  @ApiResponse({
+    status: 201,
+    description: 'User successfully registered',
+    schema: {
+      example: {
+        _id: 'someId',
+        username: 'ExampleName',
+        email: 'Example@mm.com',
+      },
+    },
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiOperation({ summary: 'Create User' })
   async signUp(@Body() user: SignupDto) {
     return await this.usersService.signUp(user);
   }
   @Serialize(SignInResDto)
+  @ApiBody({ type: SignInDto })
+  @ApiResponse({
+    status: 201,
+    description: 'User successfully logged in',
+    schema: { example: { token: '<JWT_token>' } },
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
   @Post('/login')
+  @ApiOperation({ summary: 'Login' })
   async signIn(@Body() data: SignInDto) {
     return await this.usersService.signIn(data);
   }
   @Post('logout')
+  @ApiOperation({ summary: 'logout' })
+  @ApiResponse({ status: 200, schema: { example: 'Logout successful' } })
   async logout(@Headers('authorization') authHeader: string) {
     const token = authHeader.split(' ')[1];
     await this.usersService.logout(token);
@@ -37,7 +70,26 @@ export class UserController {
   }
   @Serialize(TransactionResDto)
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @Get('history')
+  @ApiResponse({
+    status: 200,
+    description: 'Get user transactions',
+    schema: {
+      example: [
+        {
+          _id: 'someId',
+          userId: 'someId',
+          amount: 1000,
+          fromCurrency: 'USD',
+          toCurrency: 'EGP',
+          convertedAmount: 46905.5,
+          date: '2024-05-19T07:02:54.133Z',
+        },
+      ],
+    },
+  })
+  @ApiOperation({ summary: "get User transactions'history" })
   async getUserTransactions(@Request() request: Request) {
     return await this.usersService.getUserTransactions(request);
   }
