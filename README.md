@@ -83,3 +83,9 @@ The Currency Exchange API provides Swagger documentation for easy exploration an
 The following diagram illustrates the database schema for the Currency Exchange API:
 
 ![Diagram](./DB_Diagram.png)
+
+## Project Repository Link:
+
+Explore the Project
+
+You can find the project repository [here](http://34.245.237.26). This repository contains the source code and documentation for the project, allowing you to view, contribute, and collaborate on the development of the project.

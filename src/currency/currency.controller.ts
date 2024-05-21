@@ -1,5 +1,11 @@
 import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiTags,
+  ApiBody,
+  ApiResponse,
+  ApiHeader,
+} from '@nestjs/swagger';
 import { CurrencyService } from './currency.service';
 import { AuthGuard } from '../user/auth.guard';
 import { ConvertDto } from './dtos/create-conversion.dto';
@@ -7,7 +13,7 @@ import { ConvertDto } from './dtos/create-conversion.dto';
 @ApiTags('currency')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
-@Controller('currency')
+@Controller()
 export class CurrencyController {
   constructor(private currencyService: CurrencyService) {}
 
@@ -18,7 +24,11 @@ export class CurrencyController {
     description: 'The converted amount',
     schema: { example: { convertedAmount: 85 } },
   })
-  @ApiBearerAuth()
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer token',
+    required: true,
+  })
   async convert(@Body() convertDto: ConvertDto, @Request() request: Request) {
     const { amount, from, to } = convertDto;
     const convertedAmount = await this.currencyService.convert(
