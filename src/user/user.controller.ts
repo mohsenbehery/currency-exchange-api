@@ -6,6 +6,7 @@ import {
   UseGuards,
   Request,
   Get,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Serialize } from '../interceptors/serializeInterceptor';
@@ -18,6 +19,7 @@ import { TransactionResDto } from '../currency/dtos/transaction-res.dto';
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiHeader,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -61,16 +63,31 @@ export class UserController {
     return await this.usersService.signIn(data);
   }
   @Post('logout')
-  @ApiOperation({ summary: 'logout' })
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Logout' })
   @ApiResponse({ status: 200, schema: { example: 'Logout successful' } })
+  @UseGuards(AuthGuard)
   async logout(@Headers('authorization') authHeader: string) {
+    if (!authHeader) {
+      throw new UnauthorizedException('Authorization header is missing');
+    }
+
     const token = authHeader.split(' ')[1];
+    if (!token) {
+      throw new UnauthorizedException('Bearer token is missing');
+    }
+
     await this.usersService.logout(token);
     return { message: 'Logout successful' };
   }
   @Serialize(TransactionResDto)
   @UseGuards(AuthGuard)
-  @ApiBearerAuth()
+  @ApiBearerAuth('access-token')
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer token',
+    required: true,
+  })
   @Get('history')
   @ApiResponse({
     status: 200,

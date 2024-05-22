@@ -62,11 +62,26 @@ export class UserService {
     };
   }
   async logout(token: string) {
-    const { exp } = this.jwtService.decode(token);
+    const decodedToken = this.jwtService.decode(token) as { exp: number };
+    if (!decodedToken || !decodedToken.exp) {
+      throw new Error('Invalid token');
+    }
+
+    const expirationTime = decodedToken.exp;
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (expirationTime < currentTime) {
+      throw new Error('Token is already expired');
+    }
+
+    const remainingTime = expirationTime - currentTime;
+
     const invalidatedToken = this.jwtService.sign(
       {},
-      { expiresIn: exp - Math.floor(Date.now() / 1000) },
+      { expiresIn: remainingTime },
     );
+
+    return { message: 'Logout successful' };
   }
   async getUserTransactions(request) {
     const userId = request['user'].id;

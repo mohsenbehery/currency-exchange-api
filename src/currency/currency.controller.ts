@@ -11,7 +11,7 @@ import { AuthGuard } from '../user/auth.guard';
 import { ConvertDto } from './dtos/create-conversion.dto';
 
 @ApiTags('currency')
-@ApiBearerAuth()
+@ApiBearerAuth('access-token')
 @UseGuards(AuthGuard)
 @Controller()
 export class CurrencyController {
