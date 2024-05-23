@@ -70,7 +70,7 @@ The Currency Exchange API provides Swagger documentation for easy exploration an
 
 1. Ensure that the Currency Exchange API server is running on your local machine or a remote server.
 
-2. Open your web browser and navigate to the Swagger UI endpoint: [http://localhost:3000/api-docs](http://localhost:3000/api). Replace `localhost:3000` with the appropriate server address if running on a remote server.
+2. Open your web browser and navigate to the Swagger UI endpoint: [http://localhost:3000/api](http://localhost:3000/api). Replace `localhost:3000` with the appropriate server address if running on a remote server.
 
 3. You will see the Swagger UI interface, which displays a list of available endpoints, request/response formats, and allows you to interact with the API.
 
